@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 
-type GridProp = {
+type GridProps= {
     size?: number,
     grow?: number
 }
@@ -16,12 +16,12 @@ export const Grid = styled.div`
     width: 100%;
 	/*border: 4px solid black;*/
 `
-export const Row = styled.div<GridProp>`
+export const Row = styled.div<GridProps>`
 	display: flex;
 	border: 1px solid blue;
     flex-grow: ${(props) => props?.grow};
 `
-export const Col = styled.div<GridProp>`
+export const Col = styled.div<GridProps>`
 	flex: ${(props) => props?.size};
     margin: auto;
 	border: 2px solid red;
