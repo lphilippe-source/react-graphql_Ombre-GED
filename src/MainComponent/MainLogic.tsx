@@ -1,23 +1,42 @@
 import { FC } from "react"
-import { LOGIN_USER } from '../Services/GraphQl/mutation'
-import { ApolloClient, useMutation } from '@apollo/client'
+import { ApolloClient, gql } from '@apollo/client'
 
 interface IMainProps {
-    children?:()=>JSX.Element
+    children?: (token: string) => JSX.Element
     client: ApolloClient<object>
 }
-// export type UserDto = {
-//     email: string,
-//     password: string
-// }
 
-export const MainLogic: FC<IMainProps> = ({ children,client }) => {
 
-   console.log(client) 
+export const MainLogic: FC<IMainProps> = ({ children, client }) => {
 
+    console.log(client)
+    const READ_TOKEN = gql`
+  query ReadToken($id: Int!) {
+    user(id: $id) {
+        email
+        id
+      token
+    }
+  }
+`
+    const { token } =  client.readFragment({
+        id: 'user:1',
+        fragment: gql`
+    fragment MyToken on user {
+        email
+      id
+      token
+    }
+  `
+        , variables: {
+            id: 1,
+        },
+    })
+    console.log('token: ', token)
     return (
         <>
-            {children && children()}
+            {token && children && children(token)
+            }
         </>
     )
 }
