@@ -21,9 +21,9 @@ export const Login: FC<ILoginProps> = (props) => {
                 </Col>
             </Row>
             <Row grow={1}>
-                <Col size={0}>
+                <Row size={0}>
                     <LoginComponent />
-                </Col>
+                </Row>
             </Row>
 
         </Grid>
