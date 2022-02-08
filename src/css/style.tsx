@@ -1,8 +1,10 @@
 import styled from "@emotion/styled"
 
-type GridProps= {
+type GridProps = {
     size?: number,
-    grow?: number
+    grow?: number,
+    bg?: string,
+    direction?: string,
 }
 export const Button = styled.button`
 	/* border: 1px solid green;
@@ -17,12 +19,16 @@ export const Grid = styled.div`
 	/*border: 4px solid black;*/
 `
 export const Row = styled.div<GridProps>`
-	display: flex;
-	border: 1px solid blue;
-    flex-grow: ${(props) => props?.grow};
+border: 1px solid blue;
+flex-direction:${(props) => props?.direction};
+flex-grow: ${(props) => props?.grow};
+flex: ${(props) => props?.size};
+background-color:${(props) => props?.bg}; 
 `
-export const Col = styled.div<GridProps>`
+export const Col = styled.span<GridProps>`
 	flex: ${(props) => props?.size};
+    background-color:${(props) => props?.bg};
+    flex-grow: ${(props) => props?.grow}; 
     margin: auto;
 	border: 2px solid red;
 `

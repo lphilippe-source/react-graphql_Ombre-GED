@@ -1,14 +1,32 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from "@emotion/react"
 import { FC } from "react"
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Form, Input, Button } from 'antd'
+import { Controller, useForm } from "react-hook-form"
 
- interface IFormComponentProps {
+interface IFormComponentProps {
     onFinish: (value: any) => void,
     onFinishFailed: (value: any) => void
 }
 
-export const FormComponent: FC<IFormComponentProps> = ({onFinish,onFinishFailed}) => {
-  
+export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFailed }) => {
+    const { control, handleSubmit } = useForm({
+        defaultValues: {
+            email: 'votre Email',
+            password: 'votre password'
+            // label: '',
+            // rules: [{}]
+        }
+    })
+    const onSubmit = (data: any) => {
+
+        // console.log(client)
+        onFinish(data)
+    }
+    //   const onSubmit = (data:any) => console.log(data)
     return (
+
         <Form
             size="large"
             name="basic"
@@ -18,32 +36,135 @@ export const FormComponent: FC<IFormComponentProps> = ({onFinish,onFinishFailed}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
+
+        // onSubmit={handleSubmit(onSubmit)}
         >
-            <Form.Item
+            <Controller
+
+                // label="Email"
+                name="email"
+                // rules={[{ required: true, message: 'Please input your email!' }]}
+                // name="firstName"
+                control={control}
+                rules={{
+                    maxLength: 100,
+                    required: true,
+                    pattern: {
+                        value: /\w+/,
+                        message: "todo  password check"
+                    }
+                }}
+                render={({ field }) =>
+                    <Input
+                        {...field}
+                        placeholder="entrez votre email"
+                        css={css`border-radius: 4px;
+                    box-sizing: border-box;
+                    display: block;
+                    font-size: .9rem;
+                    margin-bottom: 10px;
+                    padding: 6px 10px;
+                    width: 100%;
+                    animation: 0.3s linear 0s 1 normal none running RSI-ty8uw43tj;
+                    background-color:#252829;
+                    color: rgb(255, 255, 255);
+                    &:hover {
+                        border: 1px solid #e22063;
+                        padding: 6px 10px;
+                    }
+                    `} htmlSize={50} />
+                }
+            />
+            <Controller
+                // label="Email"
+                name="password"
+                // rules={[{ required: true, message: 'Please input your email!' }]}
+                // name="firstName"
+                control={control}
+                rules={{
+                    maxLength: 100,
+                    required: true,
+                    pattern: {
+                        value: /\w+/,
+                        message: "todo  password check"
+                    }
+                }}
+                render={({ field }) => <Input
+
+                    placeholder="entrez votre email"
+                    type={"password"}
+                    {...field}
+                    css={css`border-radius: 4px;
+                    box-sizing: border-box;
+                    display: block;
+                    font-size: .9rem;
+                    margin-bottom: 10px;
+                    padding: 6px 10px;
+                    width: 100%;
+                    background-color:#252829;
+                    animation: 0.3s linear 0s 1 normal none running RSI-ty8uw43tj;
+                    color: rgb(255, 255, 255);
+                    &:hover {
+                        border: 1px solid #e22063;
+                        padding: 6px 10px;
+                    }
+                    `}
+                    htmlSize={50} />
+                }
+            />
+            {/* <Form.Item
                 label="Email"
                 name="email"
                 rules={[{ required: true, message: 'Please input your email!' }]}
             >
-                <Input htmlSize={30}/>
-            </Form.Item>
+                <Input htmlSize={30} />
+            </Form.Item> */}
 
-            <Form.Item
+            {/* <Form.Item
                 label="Password"
                 name="password"
                 rules={[{ required: true, message: 'Please input your password!' }]}
             >
-                <Input.Password htmlSize={30}/>
-            </Form.Item>
+                <Input.Password htmlSize={30} />
+            </Form.Item> */}
 
-            <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
+            {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
                 <Checkbox>Remember me</Checkbox>
-            </Form.Item>
+            </Form.Item> */}
 
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Controller
+                // label="Email"
+                name="password"
+                // rules={[{ required: true, message: 'Please input your email!' }]}
+                // name="firstName"
+                control={control}
+                render={({ field }) =>
+                    <Button
+                        {...field}
+                        onClick={handleSubmit(onSubmit)}
+                        css={css`
+                        letter-spacing: .5rem;
+                        text-transform: uppercase;
+                        width: 100%;
+                        color: rgb(255, 255, 255);
+                        background: #c01c5a;
+                        border: 1px solid #c01c5a;
+                        padding: 6px 10px;
+                        &:hover {
+                            border: 1px solid #e22063;
+                            padding: 6px 10px;
+                        }
+                    `}
+                        type="primary" htmlType="submit">
+                        Submit
+                    </Button>
+                }
+            />
+            {/* <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
-            </Form.Item>
+            </Form.Item> */}
         </Form>
     )
 }

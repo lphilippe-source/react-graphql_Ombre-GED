@@ -8,7 +8,7 @@ export const MainComponent: FC = () => {
         {client =>
             <MainLogic client={client}>
                 {
-                    (token) => <ViewMainComponent token={token} />
+                    (token,data) => <ViewMainComponent data={data} token={token} />
                 }
             </MainLogic>
         }

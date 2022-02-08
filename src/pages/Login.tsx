@@ -1,4 +1,6 @@
-
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { css, jsx } from "@emotion/react"
 import { Col, Grid, Row } from "../css/style"
 import { FC } from "react";
 import { LoginComponent } from "../LoginComponent/LoginComponent";
@@ -20,7 +22,8 @@ export const Login: FC<ILoginProps> = (props) => {
                     "bien bien"
                 </Col>
             </Row>
-            <Row grow={1}>
+            <Row grow={1} css={css`
+                    background-color:#252829;`}>
                 <Row size={0}>
                     <LoginComponent />
                 </Row>

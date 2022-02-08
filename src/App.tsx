@@ -6,13 +6,11 @@ import {
   from,
   HttpLink,
   ApolloLink,
-  Observable,
-  FetchResult
 } from "@apollo/client"
 import { onError } from "@apollo/client/link/error"
 import { Login } from "./pages/Login"
 import { Main } from "./pages/Main"
-import { CachePersistor, LocalStorageWrapper, persistCache } from "apollo3-cache-persist"
+import { CachePersistor, LocalStorageWrapper  } from "apollo3-cache-persist"
 
 interface UserConnectedDTO {
   __typename: string,
