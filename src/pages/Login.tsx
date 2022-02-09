@@ -4,27 +4,28 @@ import { css, jsx } from "@emotion/react"
 import { Col, Grid, Row } from "../css/style"
 import { FC } from "react";
 import { LoginComponent } from "../LoginComponent/LoginComponent";
-interface ILoginProps { };
+import { HeaderComponent } from "../HeaderComponent/HeaderComponent";
+interface ILoginProps {
+    route: string
+}
 
-export const Login: FC<ILoginProps> = (props) => {
+export const Login: FC<ILoginProps> = ({ route }) => {
     return (
         <Grid>
-            <Row>
-                <Col size={1}>
-                    "coucou"
-                </Col>
+            <Row size={0}>
+                <HeaderComponent route={{
+                    path: '/login',
+                    breadcrumbName: route,
+                }} />
             </Row>
-            <Row>
-                <Col size={1}>
-                    "hello world"
-                </Col>
-                <Col size={2}>
-                    "bien bien"
-                </Col>
-            </Row>
-            <Row grow={1} css={css`
-                    background-color:#252829;`}>
-                <Row size={0}>
+            <Row size={4} css={css`
+                    background-color:#252829;
+                    align-items: center;
+                    justify-content: center;
+                    margin:auto;
+                    `}>
+                <Row size={1}
+                >
                     <LoginComponent />
                 </Row>
             </Row>

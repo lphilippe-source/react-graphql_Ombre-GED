@@ -13,10 +13,10 @@ interface IToken {
 export const ViewMainComponent: FC<IToken> = ({ token, data }) => {
     console.log(data.users)
     return (
-        <Row>{
+        <Row size={1} direction="column">{
             data.users.map((user) =>
 
-                <Row css={css`border-radius: 4px;
+                <Row size={1} css={css`border-radius: 4px;
                                 font-size: 14px;
                                 margin: 20px 0;
                                 border: 1px solid #e22063;

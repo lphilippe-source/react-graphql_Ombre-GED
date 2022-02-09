@@ -20,6 +20,7 @@ export const Grid = styled.div`
 `
 export const Row = styled.div<GridProps>`
 border: 1px solid blue;
+display:flex;
 flex-direction:${(props) => props?.direction};
 flex-grow: ${(props) => props?.grow};
 flex: ${(props) => props?.size};
