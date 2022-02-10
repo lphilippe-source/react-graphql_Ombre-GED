@@ -4,6 +4,7 @@ import { css, jsx } from "@emotion/react"
 import { FC } from "react"
 import { Form, Input, Button } from 'antd'
 import { Controller, useForm } from "react-hook-form"
+import { Credentials } from "../LoginLogic"
 
 interface IFormComponentProps {
     onFinish: (value: any) => void,
@@ -13,18 +14,14 @@ interface IFormComponentProps {
 export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFailed }) => {
     const { control, handleSubmit } = useForm({
         defaultValues: {
-            email: 'votre Email',
-            password: 'votre password'
-            // label: '',
-            // rules: [{}]
+            email: '',
+            password: ''
         }
     })
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: Credentials) => {
 
-        // console.log(client)
         onFinish(data)
     }
-    //   const onSubmit = (data:any) => console.log(data)
     return (
 
         <Form
@@ -37,14 +34,10 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
             onFinishFailed={onFinishFailed}
             autoComplete="off"
 
-        // onSubmit={handleSubmit(onSubmit)}
         >
             <Controller
 
-                // label="Email"
                 name="email"
-                // rules={[{ required: true, message: 'Please input your email!' }]}
-                // name="firstName"
                 control={control}
                 rules={{
                     maxLength: 100,
@@ -76,10 +69,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                 }
             />
             <Controller
-                // label="Email"
                 name="password"
-                // rules={[{ required: true, message: 'Please input your email!' }]}
-                // name="firstName"
                 control={control}
                 rules={{
                     maxLength: 100,
@@ -112,35 +102,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                     htmlSize={50} />
                 }
             />
-            {/* <Form.Item
-                label="Email"
-                name="email"
-                rules={[{ required: true, message: 'Please input your email!' }]}
-            >
-                <Input htmlSize={30} />
-            </Form.Item> */}
-
-            {/* <Form.Item
-                label="Password"
-                name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
-            >
-                <Input.Password htmlSize={30} />
-            </Form.Item> */}
-
-            {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-                <Checkbox>Remember me</Checkbox>
-            </Form.Item> */}
-
-            <Controller
-                // label="Email"
-                name="password"
-                // rules={[{ required: true, message: 'Please input your email!' }]}
-                // name="firstName"
-                control={control}
-                render={({ field }) =>
                     <Button
-                        {...field}
                         onClick={handleSubmit(onSubmit)}
                         css={css`
                         letter-spacing: .5rem;
@@ -158,13 +120,6 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                         type="primary" htmlType="submit">
                         Submit
                     </Button>
-                }
-            />
-            {/* <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
-            </Form.Item> */}
         </Form>
     )
 }

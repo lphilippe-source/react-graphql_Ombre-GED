@@ -6,11 +6,11 @@ import { Col, Row } from "../../css/style"
 import { UsersDTO } from "../MainLogic"
 
 interface IToken {
-    token: string,
+    // token: string,
     data: UsersDTO
 }
 
-export const ViewMainComponent: FC<IToken> = ({ token, data }) => {
+export const ViewMainComponent: FC<IToken> = ({  data }) => {
     console.log(data.users)
     return (
         <Row size={1} direction="column">{

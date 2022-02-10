@@ -12,3 +12,12 @@ mutation login($loginUserInput: LoginUserInput!) {
     }
   }
 `
+export const CREATE_USER = gql`
+mutation createUser($user: UserDTO!) {
+  createUser(user: $user) {
+    id
+    pseudo
+    password
+    email
+  }
+}`

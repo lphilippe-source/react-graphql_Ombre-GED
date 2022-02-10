@@ -1,11 +1,10 @@
-import { PageHeader, Menu, Dropdown, Button, Tag, Typography, BreadcrumbProps} from 'antd'
+import { PageHeader, Menu, Dropdown, Button, Tag, Typography } from 'antd'
 import { EllipsisOutlined } from '@ant-design/icons'
 import { FC } from "react"
-import { Col, Row } from '../css/style'
 import { css } from '@emotion/react'
 import '../css/index.css'
+import {  useNavigate } from 'react-router-dom'
 const { Paragraph } = Typography;
-
 const menu = (
     // <Col direction='column' css={css`height:30px`}>
   <Menu css={css`height:30px`}>
@@ -104,6 +103,8 @@ breadcrumbName:string
 }
 
 export const HeaderComponent: FC<IHeaderComponentProps> = ({route}) => {
+
+const navigate = useNavigate()
 const routes:BreadCrumb[] = [
   {
     path: 'first',
@@ -116,9 +117,6 @@ const routes:BreadCrumb[] = [
   // },
 ]
     return (
-
-
-
   <PageHeader
   // css={css`height:30px`}
     title="Title"
@@ -126,8 +124,8 @@ const routes:BreadCrumb[] = [
     subTitle="This is a subtitle"
     tags={<Tag color="blue">Running</Tag>}
     extra={[
-      <Button key="3">Operation</Button>,
-      <Button key="2">Operation</Button>,
+      <Button onClick={()=>navigate("/login")} key="3">Login</Button>,
+      <Button onClick={()=>navigate("/")} key="2">Home</Button>,
       <Button key="1" type="primary">
         Primary
       </Button>,
