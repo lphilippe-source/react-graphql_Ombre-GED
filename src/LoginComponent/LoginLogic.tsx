@@ -27,8 +27,8 @@ export const LoginLogic: FC<ILoginProps> = ({ client, children }) => {
             }
         })
             .then((res) => {
-                // console.log(res.data.login.access_token)
                 //write to cache
+                
                 client.writeQuery({
                     query: gql`
                   query WriteToken($email: String!) {

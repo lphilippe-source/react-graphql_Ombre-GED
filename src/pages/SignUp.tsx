@@ -13,7 +13,7 @@ export const SignUp: FC<ISignUpProps> = ({ route }) => {
         <Grid>
             <Row size={0}>
                 <HeaderComponent route={{
-                    path: '/',
+                    path: '/signup',
                     breadcrumbName: route,
                 }} />
             </Row>
