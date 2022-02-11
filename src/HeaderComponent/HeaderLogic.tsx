@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ViewPageHeader } from "./Views/ViewPageHeader";
 interface IHeaderLogicProps {
     route: BreadCrumb,
-    children: (navigate: any,routes:any) => JSX.Element
+    children: (navigate: any, routes: any) => JSX.Element
 }
 export interface BreadCrumb {
     path: string,
@@ -24,7 +24,7 @@ export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route }) => {
     ]
     return (
         <>
-        {(navigate:any,routes:any)=>children(navigate,routes)}
+            {children && children(navigate, routes)}
         </>
         // < ViewPageHeader navigate={navigate} routes={routes} />
     )
