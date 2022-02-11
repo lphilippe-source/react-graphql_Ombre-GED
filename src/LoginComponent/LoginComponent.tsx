@@ -2,6 +2,7 @@ import { ApolloConsumer } from "@apollo/client"
 import { FC } from "react"
 import { LoginLogic } from "./LoginLogic"
 import { FormComponent } from "./Views/FormComponent"
+import { ViewTitle } from "./Views/ViewTitle"
 
 export const LoginComponent: FC = () => {
     return <ApolloConsumer>
@@ -14,6 +15,7 @@ export const LoginComponent: FC = () => {
                             onFinishFailed={onFinishFailed}>
                         </FormComponent>
                 }
+                        {()=><ViewTitle/>}
             </LoginLogic>
         }
     </ApolloConsumer>

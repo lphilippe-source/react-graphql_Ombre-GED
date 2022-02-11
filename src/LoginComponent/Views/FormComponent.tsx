@@ -26,6 +26,9 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
     return (
 
         <Form
+        css={css`
+        flex:1
+        `}
             size="large"
             name="basic"
             labelCol={{ span: 8 }}
@@ -36,6 +39,15 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
             autoComplete="off"
 
         >
+            {/* <Col ><strong>
+                <h1 css={css`text-align:center;
+                letter-spacing: .5rem;
+                text-transform: uppercase;
+                width: 100%;
+                color: #777673;
+                padding: 6px 10px;`}>Connexion</h1>
+            </strong>
+            </Col> */}
             <Controller
 
                 name="email"
@@ -106,6 +118,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
             <Button
                 onClick={handleSubmit(onSubmit)}
                 css={css`
+                        margin-top:20px;
                         letter-spacing: .5rem;
                         text-transform: uppercase;
                         width: 100%;

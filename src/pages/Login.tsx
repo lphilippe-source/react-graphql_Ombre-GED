@@ -20,11 +20,11 @@ export const Login: FC<ILoginProps> = ({ route }) => {
             </Row>
             <Row size={4} css={css`
                     background-color:#252829;
-                    align-items: center;
-                    justify-content: center;
+                    align-items: self-start;
+
                     margin:auto;
                     `}>
-                <Row size={1}
+                <Row size={1} direction="column"
                 >
                     <LoginComponent />
                 </Row>
@@ -32,4 +32,6 @@ export const Login: FC<ILoginProps> = ({ route }) => {
 
         </Grid>
     )
+    // align-items: center;
+    // justify-content: center;
 }
