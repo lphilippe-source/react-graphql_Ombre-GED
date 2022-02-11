@@ -5,6 +5,7 @@ import { FC } from "react"
 import { Form, Input, Button } from 'antd'
 import { Controller, useForm } from "react-hook-form"
 import { Credentials } from "../LoginLogic"
+import { Col, Row } from "../../css/style"
 
 interface IFormComponentProps {
     onFinish: (value: any) => void,
@@ -102,9 +103,9 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                     htmlSize={50} />
                 }
             />
-                    <Button
-                        onClick={handleSubmit(onSubmit)}
-                        css={css`
+            <Button
+                onClick={handleSubmit(onSubmit)}
+                css={css`
                         letter-spacing: .5rem;
                         text-transform: uppercase;
                         width: 100%;
@@ -117,9 +118,17 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                             padding: 6px 10px;
                         }
                     `}
-                        type="primary" htmlType="submit">
-                        Submit
-                    </Button>
+                type="primary" htmlType="submit">
+                Submit
+            </Button>
+            <Row>
+                <Col>
+                    <a href="/signup">register now!</a>
+                </Col>
+                <Col>
+                    <a href="/signup">forgot password?</a>
+                </Col>
+            </Row>
         </Form>
     )
 }

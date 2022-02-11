@@ -17,15 +17,10 @@ export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route }) => {
             breadcrumbName: '/Home',
         },
         route,
-        // {
-        //   path: 'second',
-        //   breadcrumbName: 'Third-level Menu',
-        // },
     ]
     return (
         <>
             {children && children(navigate, routes)}
         </>
-        // < ViewPageHeader navigate={navigate} routes={routes} />
     )
 }

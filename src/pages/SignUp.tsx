@@ -18,9 +18,13 @@ export const SignUp: FC<ISignUpProps> = ({ route }) => {
                 }} />
             </Row>
             <Row size={4} css={css`
-                    background-color:#252829;`}>
-                <Row direction="column" size={1}>
-                <SignUpComponent/>
+                    background-color:#252829;
+                    align-items: center;
+                    justify-content: center;
+                    margin:auto;
+                    `}>
+                <Row  size={1}>
+                    <SignUpComponent />
                 </Row>
             </Row>
         </Grid>

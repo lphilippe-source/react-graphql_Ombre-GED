@@ -19,6 +19,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
         defaultValues: {
             email: '',
             password: '',
+            password2: '',
             firstname: '',
             lastname: '',
             pseudo: ''
@@ -26,7 +27,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
     })
     const onSubmit = (data: UserModel) => {
 
-        console.log('formdata : ',data)
+        console.log('formdata : ', data)
         onFinish(data)
     }
     return (
@@ -41,6 +42,18 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
             autoComplete="off"
 
         >
+            <Col ><strong>
+                <h1 css={css`text-align:center;
+                letter-spacing: .5rem;
+                text-transform: uppercase;
+                width: 100%;
+                color: #777673;
+                padding: 6px 10px;`}>Inscription</h1>
+            </strong>
+            </Col>
+            <label htmlFor="email" css={css`padding-left:10px;`}>
+                <strong>votre email :</strong>
+            </label>
             <Controller
 
                 name="email"
@@ -61,7 +74,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     box-sizing: border-box;
                     display: block;
                     font-size: .9rem;
-                    margin-bottom: 10px;
+                    margin-bottom: 30px;
                     padding: 6px 10px;
                     width: 100%;
                     animation: 0.3s linear 0s 1 normal none running RSI-ty8uw43tj;
@@ -74,6 +87,9 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     `} htmlSize={50} />
                 }
             />
+            <label htmlFor="firstname" css={css`padding-left:10px;`}>
+                <strong>votre prénom :</strong>
+            </label>
             <Controller
                 name="firstname"
                 control={control}
@@ -93,7 +109,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     box-sizing: border-box;
                     display: block;
                     font-size: .9rem;
-                    margin-bottom: 10px;
+                    margin-bottom: 30px;
                     padding: 6px 10px;
                     width: 100%;
                     animation: 0.3s linear 0s 1 normal none running RSI-ty8uw43tj;
@@ -106,6 +122,9 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     `} htmlSize={50} />
                 }
             />
+            <label htmlFor="lastname" css={css`padding-left:10px;`}>
+                <strong>votre nom :</strong>
+            </label>
             <Controller
                 name="lastname"
                 control={control}
@@ -125,7 +144,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                         box-sizing: border-box;
                         display: block;
                         font-size: .9rem;
-                        margin-bottom: 10px;
+                        margin-bottom: 30px;
                         padding: 6px 10px;
                         width: 100%;
                         animation: 0.3s linear 0s 1 normal none running RSI-ty8uw43tj;
@@ -138,6 +157,9 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                         `} htmlSize={50} />
                 }
             />
+            <label htmlFor="pseudo" css={css`padding-left:10px;`}>
+                <strong>votre pseudonyme :</strong>
+            </label>
             <Controller
                 name="pseudo"
                 control={control}
@@ -157,7 +179,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                         box-sizing: border-box;
                         display: block;
                         font-size: .9rem;
-                        margin-bottom: 10px;
+                        margin-bottom: 30px;
                         padding: 6px 10px;
                         width: 100%;
                         animation: 0.3s linear 0s 1 normal none running RSI-ty8uw43tj;
@@ -170,6 +192,9 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                         `} htmlSize={50} />
                 }
             />
+            <label htmlFor="password" css={css`padding-left:10px;`}>
+                <strong>Votre mot de passe :</strong>
+            </label>
             <Controller
                 name="password"
                 control={control}
@@ -190,7 +215,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     box-sizing: border-box;
                     display: block;
                     font-size: .9rem;
-                    margin-bottom: 10px;
+                    margin-bottom: 30px;
                     padding: 6px 10px;
                     width: 100%;
                     background-color:#252829;
@@ -204,19 +229,22 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     htmlSize={50} />
                 }
             />
+            <label htmlFor="password2" css={css`padding-left:10px;`}>
+                <strong> Entrez-le une seconde fois :</strong>
+            </label>
             <Controller
-                name="password"
+                name="password2"
                 control={control}
                 render={({ field }) =>
                     <Input
-                    type={"password"}
+                        type={"password"}
                         placeholder="Entrer De Nouveau Votre Mot De Passe"
                         {...field}
                         css={css`border-radius: 4px;
                     box-sizing: border-box;
                     display: block;
                     font-size: .9rem;
-                    margin-bottom: 10px;
+                    margin-bottom: 30px;
                     padding: 6px 10px;
                     width: 100%;
                     background-color:#252829;
@@ -231,9 +259,9 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                     />
                 }
             />
-                    <Button
-                        onClick={handleSubmit(onSubmit)}
-                        css={css`
+            <Button
+                onClick={handleSubmit(onSubmit)}
+                css={css`
                         letter-spacing: .5rem;
                         text-transform: uppercase;
                         width: 100%;
@@ -246,9 +274,9 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                             padding: 6px 10px;
                         }
                     `}
-                        type="primary" htmlType="submit">
-                        Submit
-                    </Button>
+                type="primary" htmlType="submit">
+                Valider
+            </Button>
         </Form>
     )
 }
