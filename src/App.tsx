@@ -12,6 +12,7 @@ import { Login } from "./pages/Login"
 import { Main } from "./pages/Main"
 import { CachePersistor, LocalStorageWrapper } from "apollo3-cache-persist"
 import { SignUp } from "./pages/SignUp"
+import { ForgotPass } from "./pages/ForgotPass"
 
 interface UserConnectedDTO {
   __typename: string,
@@ -73,6 +74,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login route="Login" />} />
+          <Route path="/forgotpass" element={<ForgotPass route="ForgotPass" />} />
           <Route path="/" element={<Main route="Home" />} />
           <Route path="/signup" element={<SignUp route="Signup" />} />
         </Routes>

@@ -21,3 +21,23 @@ mutation createUser($user: UserDTO!) {
     email
   }
 }`
+
+export const UPDATE_USER = gql`
+mutation updateUser($userIdOrMail: String!, $updatedUser: UserDTO!) {
+  updateUser(userIdOrMail: $userIdOrMail, updatedUser: $updatedUser) {
+    id
+    password
+    email
+    pseudo
+  }
+}
+`
+export const FORGOT_PASSWORD=gql`
+mutation forgotPassword($userMail: String!) {
+  forgotPassword(userMail: $userMail) {
+    id
+    pseudo
+    email
+  }
+}
+`

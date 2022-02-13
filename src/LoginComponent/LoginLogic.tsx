@@ -1,11 +1,11 @@
 import React, { FC } from "react"
-import { LOGIN_USER } from '../Services/GraphQl/mutation'
+import { FORGOT_PASSWORD, LOGIN_USER } from '../Services/GraphQl/mutation'
 import { ApolloClient, gql, useMutation } from '@apollo/client'
 import { useNavigate } from "react-router-dom"
 import { persistor } from "../App"
 
 interface ILoginProps {
-    children?: [(onFinish: ({ email, password }: Credentials) => any, onFinishFailed: (value: any) => void) => JSX.Element,()=>any],
+    children?: [(onFinish: ({ email, password }: Credentials) => any, onFinishFailed: (value: any) => void) => JSX.Element, () => any],
     client: ApolloClient<object>
 }
 export type Credentials = {
@@ -28,16 +28,16 @@ export const LoginLogic: FC<ILoginProps> = ({ client, children }) => {
         })
             .then((res) => {
                 //write to cache
-
+console.log('login response',res)
                 client.writeQuery({
                     query: gql`
-                  query WriteToken($email: String!) {
+                    query WriteToken($email: String!) {
                     user(email: $email) {
-                      id
+                        id
                       email
                       token
                     }
-                  }`,
+                }`,
                     data: {
                         user: {
                             __typename: 'user',
@@ -62,6 +62,7 @@ export const LoginLogic: FC<ILoginProps> = ({ client, children }) => {
         }
         console.log('Failed:', errorInfo)
     }
+    
     return (
         <>
 
