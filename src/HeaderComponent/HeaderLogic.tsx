@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { ViewPageHeader } from "./Views/ViewPageHeader";
 interface IHeaderLogicProps {
     route: BreadCrumb,
-    children: (navigate: any, routes: any) => JSX.Element
+    children: (navigate: any, routes: any,client:any) => JSX.Element,
+    client:any
 }
 export interface BreadCrumb {
     path: string,
     breadcrumbName: string
 }
-export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route }) => {
+export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route, client }) => {
     const navigate = useNavigate()
     const routes: BreadCrumb[] = [
         {
@@ -20,7 +21,7 @@ export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route }) => {
     ]
     return (
         <>
-            {children && children(navigate, routes)}
+            {children && children(navigate, routes,client )}
         </>
     )
 }

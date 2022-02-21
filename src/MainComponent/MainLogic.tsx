@@ -51,6 +51,7 @@ export const MainLogic: FC<IMainProps> = ({ children, client }) => {
   useEffect(() => {
     if (!loading) {
       if (error) {
+        console.log('error:',error)
         persistor.purge()
         navigate("/Login")
         return console.log('user not connected!', error)

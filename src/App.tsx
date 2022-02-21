@@ -56,11 +56,12 @@ export const persistor = new CachePersistor({
     // filter your cached data and queries
     // return filteredData;
     const d = JSON.parse(token)
-    console.log('dataformcache: ',d)
+    // console.log('dataformcache: ', d)
     if (d["user:1"]) {
-      // console.log('data: ', { token: d["user:1"].token })
+      // console.log('data: ', d["user:1"].token )
       return d["user:1"].token
     }
+    return localStorage.getItem('apollo-cache-persist') ?? null
   },
 })
 const client = new ApolloClient({

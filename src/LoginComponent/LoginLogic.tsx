@@ -28,7 +28,7 @@ export const LoginLogic: FC<ILoginProps> = ({ client, children }) => {
         })
             .then((res) => {
                 //write to cache
-console.log('login response',res)
+                console.log('login response', res)
                 client.writeQuery({
                     query: gql`
                     query WriteToken($email: String!) {
@@ -62,7 +62,7 @@ console.log('login response',res)
         }
         console.log('Failed:', errorInfo)
     }
-    
+
     return (
         <>
 

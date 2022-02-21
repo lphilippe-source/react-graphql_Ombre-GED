@@ -31,10 +31,8 @@ export const EnterMailForPassGen: FC<IEnterMailForPassGenProps> = ({sendMail}) =
             onFinish={sendMail}
             // onFinishFailed={onFinishFailed}
             autoComplete="off"
-
         >
             <Controller
-
                 name="email"
                 control={control}
                 rules={{
@@ -66,7 +64,6 @@ export const EnterMailForPassGen: FC<IEnterMailForPassGenProps> = ({sendMail}) =
                     `} htmlSize={50} />
                 }
             />
-
             <Button
                 onClick={handleSubmit(onSubmit)}
                 css={css`
