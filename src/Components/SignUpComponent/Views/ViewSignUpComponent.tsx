@@ -4,7 +4,7 @@ import { css, jsx } from "@emotion/react"
 import { Button, Form, Input } from "antd"
 import { FC } from "react"
 import { Controller, useForm } from "react-hook-form"
-import { Col, Row } from "../../css/style"
+import { Col, Row } from "../../../css/style"
 import { UserModel, UsersDTO } from "../SignUpLogic"
 
 

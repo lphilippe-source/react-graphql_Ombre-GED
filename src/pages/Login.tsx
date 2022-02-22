@@ -3,8 +3,8 @@
 import { css, jsx } from "@emotion/react"
 import { Col, Grid, Row } from "../css/style"
 import { FC } from "react";
-import { LoginComponent } from "../LoginComponent/LoginComponent";
-import { HeaderComponent } from "../HeaderComponent/HeaderComponent";
+import { LoginComponent } from "../Components/LoginComponent/LoginComponent";
+import { HeaderComponent } from "../Components/HeaderComponent/HeaderComponent";
 interface ILoginProps {
     route: string
 }

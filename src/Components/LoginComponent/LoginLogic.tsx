@@ -1,8 +1,8 @@
 import React, { FC } from "react"
-import { FORGOT_PASSWORD, LOGIN_USER } from '../Services/GraphQl/mutation'
+import { FORGOT_PASSWORD, LOGIN_USER } from '../../Services/GraphQl/mutation'
 import { ApolloClient, gql, useMutation } from '@apollo/client'
 import { useNavigate } from "react-router-dom"
-import { persistor } from "../App"
+import { persistor } from "../../App"
 
 interface ILoginProps {
     children?: [(onFinish: ({ email, password }: Credentials) => any, onFinishFailed: (value: any) => void) => JSX.Element, () => any],

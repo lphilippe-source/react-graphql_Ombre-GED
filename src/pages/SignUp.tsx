@@ -3,8 +3,8 @@
 import { css, jsx } from "@emotion/react"
 import { FC } from "react"
 import { Col, Grid, Row } from "../css/style"
-import { HeaderComponent } from "../HeaderComponent/HeaderComponent"
-import { SignUpComponent } from "../SignUpComponent/SignUpComponent"
+import { HeaderComponent } from "../Components/HeaderComponent/HeaderComponent"
+import { SignUpComponent } from "../Components/SignUpComponent/SignUpComponent"
 interface ISignUpProps {
     route: string
 }

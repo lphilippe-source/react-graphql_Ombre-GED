@@ -3,8 +3,8 @@
 import { css, jsx } from "@emotion/react"
 import { Col, Grid, Row } from "../css/style"
 import { FC } from "react";
-import { HeaderComponent } from "../HeaderComponent/HeaderComponent";
-import { ForgotPassComponent } from "../ForgotPassComponent/ForgotPassComponent";
+import { HeaderComponent } from "../Components/HeaderComponent/HeaderComponent";
+import { ForgotPassComponent } from "../Components/ForgotPassComponent/ForgotPassComponent";
 interface IForgotPassProps {
     route: string
 }

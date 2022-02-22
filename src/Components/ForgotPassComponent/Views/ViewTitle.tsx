@@ -2,7 +2,7 @@
 /** @jsx jsx */
 import { css, jsx } from "@emotion/react";
 import { FC } from "react";
-import { Col, Row } from "../../css/style";
+import { Col, Row } from "../../../css/style";
 interface IViewTitleProps { };
 
 export const ViewTitle: FC = () => {

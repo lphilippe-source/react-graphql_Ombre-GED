@@ -3,8 +3,8 @@
 import { css, jsx } from "@emotion/react"
 import { FC } from "react"
 import { Col, Grid, Row } from "../css/style"
-import { HeaderComponent } from "../HeaderComponent/HeaderComponent"
-import { MainComponent } from "../MainComponent/MainComponent"
+import { HeaderComponent } from "../Components/HeaderComponent/HeaderComponent"
+import { MainComponent } from "../Components/MainComponent/MainComponent"
 interface IMainProps {
     route: string
 }

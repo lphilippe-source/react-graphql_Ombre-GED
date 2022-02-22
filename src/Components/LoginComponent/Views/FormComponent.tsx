@@ -4,8 +4,8 @@ import { css, jsx } from "@emotion/react"
 import { FC } from "react"
 import { Form, Input, Button } from 'antd'
 import { Controller, useForm } from "react-hook-form"
-import {  DoublePass } from "../ForgotPassLogic"
-import { Col, Row } from "../../css/style"
+import { Credentials } from "../LoginLogic"
+import { Col, Row } from "../../../css/style"
 
 interface IFormComponentProps {
     onFinish: (value: any) => void,
@@ -15,11 +15,11 @@ interface IFormComponentProps {
 export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFailed }) => {
     const { control, handleSubmit } = useForm({
         defaultValues: {
-            password: '',
-            password2: ''
+            email: '',
+            password: ''
         }
     })
-    const onSubmit = (data: DoublePass) => {
+    const onSubmit = (data: Credentials) => {
 
         onFinish(data)
     }
@@ -39,9 +39,18 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
             autoComplete="off"
 
         >
+            {/* <Col ><strong>
+                <h1 css={css`text-align:center;
+                letter-spacing: .5rem;
+                text-transform: uppercase;
+                width: 100%;
+                color: #777673;
+                padding: 6px 10px;`}>Connexion</h1>
+            </strong>
+            </Col> */}
             <Controller
 
-                name="password"
+                name="email"
                 control={control}
                 rules={{
                     maxLength: 100,
@@ -55,8 +64,6 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                     <Input
                         {...field}
                         placeholder="Entrez Votre Email"
-
-                    type={"password"}
                         css={css`border-radius: 4px;
                     box-sizing: border-box;
                     display: block;
@@ -75,7 +82,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                 }
             />
             <Controller
-                name="password2"
+                name="password"
                 control={control}
                 rules={{
                     maxLength: 100,
@@ -127,6 +134,14 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                 type="primary" htmlType="submit">
                 Submit
             </Button>
+            <Row>
+                <Col>
+                    <a href="/signup">register now!</a>
+                </Col>
+                <Col>
+                    <a  href="/forgotpass">forgot password?</a>
+                </Col>
+            </Row>
         </Form>
     )
 }

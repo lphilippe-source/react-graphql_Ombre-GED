@@ -1,9 +1,9 @@
 import { FC } from "react"
 import { ApolloClient, gql, useMutation, useQuery } from '@apollo/client'
-import { GET_USERS } from "../Services/GraphQl/query";
+import { GET_USERS } from "../../Services/GraphQl/query";
 import { useNavigate } from "react-router-dom";
-import { CREATE_USER } from "../Services/GraphQl/mutation";
-import { Credentials } from "../LoginComponent/LoginLogic";
+import { CREATE_USER } from "../../Services/GraphQl/mutation";
+import { Credentials } from "../../Components/LoginComponent/LoginLogic";
 
 
 export interface UserModel {

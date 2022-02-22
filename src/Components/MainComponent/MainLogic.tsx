@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react"
 import { ApolloClient, gql, useQuery } from '@apollo/client'
-import { GET_USERS } from "../Services/GraphQl/query";
+import { GET_USERS } from "../../Services/GraphQl/query";
 import { useNavigate } from "react-router-dom";
-import { persistor } from "../App";
+import { persistor } from "../../App";
 
 interface IMainProps {
   children?: (data: any) => JSX.Element
