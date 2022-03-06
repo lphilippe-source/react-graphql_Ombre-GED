@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react"
 import { ApolloClient, gql, useQuery } from '@apollo/client'
-import { GET_USERS } from "../../Services/GraphQl/query";
-import { useNavigate } from "react-router-dom";
-import { persistor } from "../../MasterComponent/App";
+import { GET_USERS } from "../../Services/GraphQl/query"
+import { useNavigate } from "react-router-dom"
+import { persistor } from "../../MasterComponent/appConfig"
 
 interface IMainProps {
   children?: (data: any) => JSX.Element
@@ -21,34 +21,8 @@ export interface UsersDTO {
 
 export const MainLogic: FC<IMainProps> = ({ children, client }) => {
 
-  // console.log(client)
 
-  // persistor.restore()
   const navigate = useNavigate()
-  // if (loading) return 'Loading...'
-  // if (error) return `Error! ${error.message}`
-  // let access_token: null | string = null
-  // try {
-  //   const { token } = client.readFragment({
-  //     id: 'user:1',
-  //     fragment: gql`
-  //     fragment MyToken on user {
-  //       email
-  //       id
-  //       token
-  //     }
-  //     `
-  //     , variables: {
-  //       id: 1,
-  //     },
-  //   })
-  //   access_token = token
-  // }
-  // catch (err) {
-  //   console.log('user not logged in!', err)
-  // }
-  // if (access_token)
-  // console.log('token: ', access_token)
 
   const { loading, error, data } = useQuery(GET_USERS)
 
@@ -56,7 +30,6 @@ export const MainLogic: FC<IMainProps> = ({ children, client }) => {
     if (!loading) {
       if (error) {
         if (error.message = 'Unauthorized') {
-          // persistor.restore()
           persistor.purge()
           client.clearStore()
           navigate("/Login")

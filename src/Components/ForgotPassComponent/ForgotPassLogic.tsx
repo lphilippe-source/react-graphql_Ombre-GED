@@ -2,10 +2,10 @@ import React, { FC } from "react"
 import { FORGOT_PASSWORD, UPDATE_USER } from '../../Services/GraphQl/mutation'
 import { ApolloClient, gql, useMutation } from '@apollo/client'
 import { useLocation, useNavigate } from "react-router-dom"
-import { persistor } from "../../MasterComponent/App"
+import { persistor } from "../../MasterComponent/appConfig"
 
 interface IForgotPassProps {
-    children?: [(onFinish: ({ password2, password }: DoublePass) => any, onFinishFailed: (value: any) => void) => JSX.Element, () => JSX.Element, (sendMail: (email: string)=>any) => any],
+    children?: [(onFinish: ({ password2, password }: DoublePass) => any, onFinishFailed: (value: any) => void) => JSX.Element, () => JSX.Element, (sendMail: (email: string) => any) => any],
     client: ApolloClient<object>
 }
 export type DoublePass = {
@@ -22,16 +22,9 @@ export const ForgotPassLogic: FC<IForgotPassProps> = ({ client, children }) => {
     const technicalId = new URLSearchParams(searchId).get('id')
     const navigate = useNavigate()
     const onFinish = async ({ password, password2 }: DoublePass): Promise<any> => {
-        // return await updateUser({
-        //     variables: {
-        //         loginUserInput: {
-        //             username: password2, password
-        //         }
-        //     }
-        // })
-        //     .then((res) => {
-        //write to cache
 
+        //write custom data to cache
+        // TODO check double password
         const writeCache = async () => {
             return client.writeQuery({
                 query: gql`
@@ -73,14 +66,14 @@ export const ForgotPassLogic: FC<IForgotPassProps> = ({ client, children }) => {
     }
     //query after submitting mail to get mail with link
     const [forgotPass] = useMutation(FORGOT_PASSWORD)
-    const sendMail = async ({email}:any ) => {
-        console.log('emal:',email)
+    const sendMail = async ({ email }: any) => {
+        console.log('emal:', email)
         return await forgotPass({
             variables: {
                 userMail: email
             }
         })
-        .then((res)=>console.log('response forgotpass: ',res))
+            .then((res) => console.log('response forgotpass: ', res))
     }
     const enterMailOrTypeTwoPassword = () => {
         if (token) {
@@ -91,7 +84,6 @@ export const ForgotPassLogic: FC<IForgotPassProps> = ({ client, children }) => {
     return (
         <>
             {children && children[1]()}
-            {/* {children && children[0](onFinish, onFinishFailed)} */}
             {children && enterMailOrTypeTwoPassword()}
         </>
     )

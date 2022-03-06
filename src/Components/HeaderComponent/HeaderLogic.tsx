@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { persistor } from "../../MasterComponent/App"
+import { persistor } from "../../MasterComponent/appConfig"
 import { isJson, returnTokenFromLocal } from "../../Services/utilsFunction/parsingTokenFunctions"
 
 interface IHeaderLogicProps {
@@ -12,9 +12,7 @@ export interface BreadCrumb {
     path: string,
     breadcrumbName: string
 }
-// type CachedUser = {
 
-// }
 export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route, client }) => {
     const [isLoginToken, setIsLoginToken] = useState<string | null>(null)
     const [pseudo, setPseudo] = useState<string | null>(null)

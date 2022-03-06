@@ -40,27 +40,6 @@ export const SignUpLogic: FC<ISignUpProps> = ({ children, client }) => {
       .then((res) => {
         console.log(res)
         navigate("/")
-        // client.writeQuery({
-        //   query: gql`
-        //           query WriteToken($email: String!) {
-        //             user(email: $email) {
-        //               id
-        //               email
-        //               token
-        //             }
-        //           }`,
-        //   data: {
-        //     user: {
-        //       __typename: 'user',
-        //       id: 1,
-        //       email: res.data.login.user.email,
-        //       token: res.data.login.access_token
-        //     },
-        //   },
-        //   variables: {
-        //     email: res.data.login.user.email,
-        //   }
-        // })
       })
   }
 
@@ -71,26 +50,7 @@ export const SignUpLogic: FC<ISignUpProps> = ({ children, client }) => {
     console.log('Failed:', errorInfo)
   }
   // TODO if token already exist-> you already have an account
-  // try {
-  //   const { token } = client.readFragment({
-  //     id: 'user:1',
-  //     fragment: gql`
-  //   fragment MyToken on user {
-  //       email
-  //     id
-  //     token
-  //   }
-  // `
-  //     , variables: {
-  //       id: 1,
-  //     },
-  //   })
-  //   access_token = token
-  // }
-  // catch (err) {
-  //   console.log('user not logged in!', err)
-  //   navigate("/Login")
-  // }
+  
   return (
     <>
       {!loading && !error && children && children(onFinish, onFinishFailed)
