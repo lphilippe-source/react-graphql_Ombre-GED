@@ -1,8 +1,8 @@
 import React, { FC } from "react"
-import { FORGOT_PASSWORD, LOGIN_USER } from '../../Services/GraphQl/mutation'
-import { ApolloClient, gql, useMutation } from '@apollo/client'
+import { LOGIN_USER } from '../../Services/GraphQl/mutation'
+import { ApolloClient, useMutation } from '@apollo/client'
 import { useNavigate } from "react-router-dom"
-import { persistor } from "../../MasterComponent/appConfig"
+import { onLoginValidate } from "../../Services/utilsFunction/successLoginFunction"
 
 interface ILoginProps {
     children?: [(onFinish: ({ email, password }: Credentials) => any, onFinishFailed: (value: any) => void) => JSX.Element, () => any],
@@ -19,40 +19,8 @@ export const LoginLogic: FC<ILoginProps> = ({ client, children }) => {
 
     const navigate = useNavigate()
     const onFinish = async ({ email, password }: Credentials): Promise<any> => {
-        return await login({
-            variables: {
-                loginUserInput: {
-                    username: email, password
-                }
-            }
-        })
-            .then((res) => {
-                //write to cache
-                console.log('login response', res)
-                client.writeQuery({
-                    query: gql`
-                    query WriteToken($email: String!) {
-                    user(email: $email) {
-                        id
-                      email
-                      token
-                    }
-                }`,
-                    data: {
-                        user: {
-                            __typename: 'user',
-                            id: 1,
-                            email: res.data.login.user.email,
-                            token: res.data.login.access_token
-                        },
-                    },
-                    variables: {
-                        email: res.data.login.user.email,
-                    }
-                })
-            })
-            .then(() => persistor.persist()
-            )
+
+        return onLoginValidate({ email, password }, login)
             .then(() => navigate("/")
             )
     }

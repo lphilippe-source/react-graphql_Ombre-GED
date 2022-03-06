@@ -40,7 +40,7 @@ export const EnterMailForPassGen: FC<IEnterMailForPassGenProps> = ({sendMail}) =
                     required: true,
                     pattern: {
                         value: /\w+/,
-                        message: "todo  password check"
+                        message: "TODO  mail regex"
                     }
                 }}
                 render={({ field }) =>
@@ -81,7 +81,7 @@ export const EnterMailForPassGen: FC<IEnterMailForPassGenProps> = ({sendMail}) =
                 }
                 `}
                 type="primary" htmlType="submit">
-                Submit
+                Valider
             </Button>
         </Form>
     );

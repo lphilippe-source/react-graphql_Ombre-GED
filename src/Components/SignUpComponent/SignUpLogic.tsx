@@ -1,16 +1,16 @@
 import { FC } from "react"
-import { ApolloClient, gql, useMutation, useQuery } from '@apollo/client'
-import { GET_USERS } from "../../Services/GraphQl/query";
-import { useNavigate } from "react-router-dom";
-import { CREATE_USER } from "../../Services/GraphQl/mutation";
-import { Credentials } from "../../Components/LoginComponent/LoginLogic";
+import { ApolloClient, useMutation } from '@apollo/client'
+import { useNavigate } from "react-router-dom"
+import { CREATE_USER, LOGIN_USER } from "../../Services/GraphQl/mutation"
+import { Credentials, LoginLogic } from "../../Components/LoginComponent/LoginLogic"
+import { onLoginValidate } from "../../Services/utilsFunction/successLoginFunction"
 
 
 export interface UserModel {
   __typename?: string
   email?: string
   id?: string
-  password?: string
+  password: string
   pseudo?: string
 }
 export interface UsersDTO {
@@ -25,9 +25,10 @@ interface ISignUpProps {
 export const SignUpLogic: FC<ISignUpProps> = ({ children, client }) => {
 
 
-  const [signUp, { data, loading, error }] = useMutation(CREATE_USER)
+  const [signUp, { loading, error }] = useMutation(CREATE_USER)
+  const [login] = useMutation(LOGIN_USER)
   const navigate = useNavigate()
-  const onFinish = async ({ email, password ,pseudo}: UserModel): Promise<any> => {
+  const onFinish = async ({ email, password, pseudo }: UserModel): Promise<any> => {
     return await signUp({
       variables: {
         user: {
@@ -39,8 +40,13 @@ export const SignUpLogic: FC<ISignUpProps> = ({ children, client }) => {
     })
       .then((res) => {
         console.log(res)
-        navigate("/")
+        return onLoginValidate({ email: res.data.createUser.email, password }, login)
       })
+      .then((afterValidation) => {
+        console.log('afterValidation: ', afterValidation)
+        navigate("/")
+      }
+      )
   }
 
   const onFinishFailed = (errorInfo: any): void => {
@@ -49,8 +55,9 @@ export const SignUpLogic: FC<ISignUpProps> = ({ children, client }) => {
     }
     console.log('Failed:', errorInfo)
   }
-  // TODO if token already exist-> you already have an account
-  
+  // TODO if token already exist-> you re already connected
+  // TODO if email already exist-> you already have an account
+
   return (
     <>
       {!loading && !error && children && children(onFinish, onFinishFailed)

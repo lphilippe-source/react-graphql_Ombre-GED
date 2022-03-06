@@ -30,12 +30,11 @@ export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route, client }) 
 
         const data = window.localStorage.getItem('user-logged-in')
         // javascript <3
-        console.log(data)//undefined
-        console.log('data: ', typeof data === 'string')//true
+        // console.log(data)//undefined
+        // console.log('data: ', typeof data === 'string')//true
 
         if (isJson(data)) {
             if (data && JSON.parse(data)) {
-                console.log('im not undefined!')
                 setPseudo(JSON.parse(data)['user:1'].pseudo)
                 setMail(JSON.parse(data)['user:1'].email)
             }

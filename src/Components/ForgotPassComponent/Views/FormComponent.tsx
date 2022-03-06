@@ -21,7 +21,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
     })
     const onSubmit = (data: DoublePass) => {
 
-        onFinish(data)
+        data.password===data.password2?  onFinish(data):onFinishFailed('les deux mots de passe doivent être les mêmes! ')
     }
     return (
 
@@ -48,7 +48,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                     required: true,
                     pattern: {
                         value: /\w+/,
-                        message: "todo  password check"
+                        message: "TODO  password regex"
                     }
                 }}
                 render={({ field }) =>
@@ -82,7 +82,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                     required: true,
                     pattern: {
                         value: /\w+/,
-                        message: "todo  password check"
+                        message: "TODO  password regex"
                     }
                 }}
                 render={({ field }) => <Input
@@ -125,7 +125,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                         }
                     `}
                 type="primary" htmlType="submit">
-                Submit
+                Valider
             </Button>
         </Form>
     )

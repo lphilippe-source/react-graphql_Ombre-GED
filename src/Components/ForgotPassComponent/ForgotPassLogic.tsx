@@ -58,7 +58,7 @@ export const ForgotPassLogic: FC<IForgotPassProps> = ({ client, children }) => {
             })
             )
     }
-    const onFinishFailed = (errorInfo: any): void => {
+    const onFinishFailed = (errorInfo: string): void => {
         if (error) {
             console.log(error)
         }

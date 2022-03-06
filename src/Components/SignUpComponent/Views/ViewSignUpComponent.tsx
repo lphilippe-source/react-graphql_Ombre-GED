@@ -15,6 +15,7 @@ interface IViewSignUpComponent {
 
 export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFinishFailed }) => {
     // console.log(data.users)
+    //TODO add info user on backend model
     const { control, handleSubmit } = useForm({
         defaultValues: {
             email: '',
