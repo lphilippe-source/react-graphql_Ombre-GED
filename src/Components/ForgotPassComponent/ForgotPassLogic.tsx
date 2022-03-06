@@ -25,6 +25,8 @@ export const ForgotPassLogic: FC<IForgotPassProps> = ({ client, children }) => {
 
         //write custom data to cache
         // TODO check double password
+        // TODO change template mail
+        //TODO popup or message when incorrect double pass check
         const writeCache = async () => {
             return client.writeQuery({
                 query: gql`
@@ -67,7 +69,7 @@ export const ForgotPassLogic: FC<IForgotPassProps> = ({ client, children }) => {
     //query after submitting mail to get mail with link
     const [forgotPass] = useMutation(FORGOT_PASSWORD)
     const sendMail = async ({ email }: any) => {
-        console.log('emal:', email)
+        console.log('email:', email)
         return await forgotPass({
             variables: {
                 userMail: email

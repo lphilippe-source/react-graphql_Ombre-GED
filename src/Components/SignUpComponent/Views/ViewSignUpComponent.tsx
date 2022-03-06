@@ -3,21 +3,30 @@
 import { css, jsx } from "@emotion/react"
 import { Button, Form, Input } from "antd"
 import { FC } from "react"
-import { Controller, useForm } from "react-hook-form"
-import { Col, Row } from "../../../css/style"
-import { UserModel, UsersDTO } from "../SignUpLogic"
+import { Controller, useForm, SubmitHandler } from "react-hook-form"
+import { Col } from "../../../css/style"
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 
 
 interface IViewSignUpComponent {
     onFinish: (value: any) => void,
     onFinishFailed: (value: any) => void
 }
+type UserForm = {
+    email: string,
+    password: string,
+    password2: string,
+    firstname: string,
+    lastname: string,
+    pseudo: string
+}
 
 export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFinishFailed }) => {
     // console.log(data.users)
     //TODO add info user on backend model
-    const { control, handleSubmit } = useForm({
+    const { register, formState: { errors }, control, handleSubmit } = useForm({
         defaultValues: {
+            form: '',
             email: '',
             password: '',
             password2: '',
@@ -26,19 +35,22 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
             pseudo: ''
         }
     })
-    const onSubmit = (data: UserModel) => {
+    const onSubmit: SubmitHandler<UserForm> = (data: UserForm) => {
 
-        console.log('formdata : ', data)
+        data.password === data.password2 ? onFinish(data) : onFinishFailed('les deux mots de passe doivent être les mêmes! ')
         onFinish(data)
     }
     return (
+
+
         <Form
+            // onSubmit={handleSubmit(onSubmit)}
             size="large"
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             initialValues={{ remember: true }}
-            onFinish={onFinish}
+            onFinish={handleSubmit(onSubmit)}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
 
@@ -53,7 +65,8 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
             </strong>
             </Col>
             <label htmlFor="email" css={css`padding-left:10px;`}>
-                <strong>votre email :</strong>
+                {/* <strong>votre email :</strong> */}
+                {errors.email && "L'Email Est Requis!"}
             </label>
             <Controller
 
@@ -69,6 +82,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                 }}
                 render={({ field }) =>
                     <Input
+                        {...register("email", { required: true })}
                         {...field}
                         placeholder="entrez votre email"
                         css={css`border-radius: 4px;
@@ -159,7 +173,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                 }
             />
             <label htmlFor="pseudo" css={css`padding-left:10px;`}>
-                <strong>votre pseudonyme :</strong>
+                <strong>votre Pseudonyme :</strong>
             </label>
             <Controller
                 name="pseudo"
@@ -195,6 +209,7 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
             />
             <label htmlFor="password" css={css`padding-left:10px;`}>
                 <strong>Votre mot de passe :</strong>
+                {errors.password && "Le Mot De Passe Est Requis!"}
             </label>
             <Controller
                 name="password"
@@ -207,14 +222,16 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                         message: "todo  password check"
                     }
                 }}
-                render={({ field }) => <Input
+                render={({ field }) => <Input.Password
 
+                    {...register("password", { required: true })}
                     placeholder="Entrez Votre Mot De Passe"
                     type={"password"}
+                    iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                     {...field}
                     css={css`border-radius: 4px;
                     box-sizing: border-box;
-                    display: block;
+                    display: flex;
                     font-size: .9rem;
                     margin-bottom: 30px;
                     padding: 6px 10px;
@@ -232,18 +249,21 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
             />
             <label htmlFor="password2" css={css`padding-left:10px;`}>
                 <strong> Entrez-le une seconde fois :</strong>
+                {errors.password2 && "Le 2me Mot De Passe Est Requis!"}
             </label>
             <Controller
                 name="password2"
                 control={control}
                 render={({ field }) =>
-                    <Input
+                    <Input.Password
+                        {...register("password2", { required: true })}
+                        placeholder="Vérification De Votre Mot De Passe"
                         type={"password"}
-                        placeholder="Entrer De Nouveau Votre Mot De Passe"
+                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         {...field}
                         css={css`border-radius: 4px;
                     box-sizing: border-box;
-                    display: block;
+                    display: flex;
                     font-size: .9rem;
                     margin-bottom: 30px;
                     padding: 6px 10px;
@@ -261,7 +281,6 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                 }
             />
             <Button
-                onClick={handleSubmit(onSubmit)}
                 css={css`
                         letter-spacing: .5rem;
                         text-transform: uppercase;
@@ -279,5 +298,6 @@ export const ViewSignUpComponent: FC<IViewSignUpComponent> = ({ onFinish, onFini
                 Valider
             </Button>
         </Form>
+
     )
 }

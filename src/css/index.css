@@ -48,7 +48,13 @@ code {
   margin-left: 8px;
 }
 */
-
+.ant-input-lg{
+  font-size:14px;
+  background-color: #252829 !important;
+}
+  .ant-input-affix-wrapper:hover {
+    border: 1px solid #cc2363 !important;
+  }
 .ant-page-header{
   width:100% !important;
 flex:1;

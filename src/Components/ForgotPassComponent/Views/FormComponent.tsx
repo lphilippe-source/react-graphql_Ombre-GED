@@ -54,7 +54,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                 render={({ field }) =>
                     <Input
                         {...field}
-                        placeholder="Entrez Votre Email"
+                        placeholder="Entrez Votre Mot De Passe"
 
                     type={"password"}
                         css={css`border-radius: 4px;
@@ -87,7 +87,7 @@ export const FormComponent: FC<IFormComponentProps> = ({ onFinish, onFinishFaile
                 }}
                 render={({ field }) => <Input
 
-                    placeholder="Entrez Votre Mot De Passe"
+                    placeholder="Vérification De Votre Mot De Passe"
                     type={"password"}
                     {...field}
                     css={css`border-radius: 4px;
