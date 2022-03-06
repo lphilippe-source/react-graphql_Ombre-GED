@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { FORGOT_PASSWORD, UPDATE_USER } from '../../Services/GraphQl/mutation'
 import { ApolloClient, gql, useMutation } from '@apollo/client'
 import { useLocation, useNavigate } from "react-router-dom"
-import { persistor } from "../../App"
+import { persistor } from "../../MasterComponent/App"
 
 interface IForgotPassProps {
     children?: [(onFinish: ({ password2, password }: DoublePass) => any, onFinishFailed: (value: any) => void) => JSX.Element, () => JSX.Element, (sendMail: (email: string)=>any) => any],

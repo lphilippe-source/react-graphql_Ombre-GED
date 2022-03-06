@@ -10,16 +10,20 @@ interface IViewPageHeaderProps {
     navigate: NavigateFunction,
     routes: BreadCrumb[],
     toggleLogin: () => void,
-    isLoginToken: string | null
+    isLoginToken: string | null,
+    pseudo:string|null,
+    mail:string|null
+    
 }
 
-export const ViewPageHeader: FC<IViewPageHeaderProps> = ({ navigate, routes, isLoginToken,toggleLogin  }) => {
-console.log('toggleLogin: ',toggleLogin)
+export const ViewPageHeader: FC<IViewPageHeaderProps> = ({ navigate, routes, isLoginToken,toggleLogin,pseudo,mail}) => {
+// console.log('toggleLogin: ',toggleLogin)
+console.log(pseudo,mail)
     return (
         <PageHeader
-            title="Title"
+            title={pseudo}
             className="site-page-header"
-            subTitle="This is a subtitle"
+            subTitle={mail}
             tags={isLoginToken?<Tag color="blue">Connected</Tag>:<Tag color="orange">Disconnected</Tag>}
             extra={[
                 <Button onClick={() => toggleLogin()} key="3">{isLoginToken ? 'Logout' : 'Login'}</Button>,

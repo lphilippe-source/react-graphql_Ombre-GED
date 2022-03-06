@@ -19,7 +19,16 @@ export const HeaderComponent: FC<IHeaderComponentProps> = ({ route }) => {
       {client =>
         <HeaderLogic route={route} client={client}>
           {
-            (navigate: any, routes: any,isLoginToken:any,toggleLogin:()=>void) => < ViewPageHeader toggleLogin={toggleLogin} isLoginToken={isLoginToken} navigate={navigate} routes={routes} />
+            (navigate: any, routes: any, isLoginToken: any, toggleLogin: () => void,pseudo:string|null,mail:string|null) =>
+              < ViewPageHeader
+                toggleLogin={toggleLogin}
+                isLoginToken={isLoginToken}
+                navigate={navigate}
+                routes={routes}
+                pseudo={pseudo}
+                mail={mail}
+               
+              />
           }
         </HeaderLogic>}
     </ApolloConsumer>
