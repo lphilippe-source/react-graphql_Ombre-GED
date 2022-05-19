@@ -8,6 +8,10 @@ mutation login($loginUserInput: LoginUserInput!) {
         id
         email
         pseudo
+        files{
+          name
+          ext
+        }
       }
     }
   }
@@ -32,7 +36,7 @@ mutation updateUser($userIdOrMail: String!, $updatedUser: UserDTO!) {
   }
 }
 `
-export const FORGOT_PASSWORD=gql`
+export const FORGOT_PASSWORD = gql`
 mutation forgotPassword($userMail: String!) {
   forgotPassword(userMail: $userMail) {
     id
@@ -40,4 +44,11 @@ mutation forgotPassword($userMail: String!) {
     email
   }
 }
+`
+export const TEMPORARY_FILE_DOWNLOAD = gql`
+mutation temporaryDocument(
+  $filename: String!
+  ){
+   temporaryDocument(filename:$filename)
+  }
 `

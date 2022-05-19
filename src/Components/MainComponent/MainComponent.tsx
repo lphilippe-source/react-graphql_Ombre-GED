@@ -8,7 +8,7 @@ export const MainComponent: FC = () => {
         {client =>
             <MainLogic client={client}>
                 {
-                    (data) => <ViewMainComponent data={data}  />
+                    (fileInfo) => <ViewMainComponent fileInfo={fileInfo}  />
                 }
             </MainLogic>
         }
