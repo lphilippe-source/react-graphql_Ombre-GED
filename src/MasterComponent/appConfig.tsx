@@ -12,7 +12,7 @@ import { returnTokenFromLocal } from "../Services/utilsFunction/parsingTokenFunc
 export const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
         graphQLErrors.map(({ message, locations, path }) => {
-            alert(`graphQl error ${message}`)
+            console.log(`graphQl error ${message}`)
         })
     }
 })
@@ -73,7 +73,7 @@ export const persistor = new CachePersistor({
         console.log('dataformcache: ', d)
         if (d["user:1"]) {
             console.log("string:", JSON.stringify({ "user:1": d["user:1"] }))
-            return JSON.stringify({ "user:1": d["user:1"] })
+            return JSON.stringify({ "user:1": d["user:1"],"files:1":d["files:1"] })
         }
     },
 })
