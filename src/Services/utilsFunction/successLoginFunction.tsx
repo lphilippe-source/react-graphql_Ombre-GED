@@ -18,6 +18,7 @@ export type Input={
     password:string
 }
 
+//create query to write into cache
 export const onLoginValidate = async ({ email, password }: Credentials,login:Login): Promise<any> => {
     return await login({
         variables: {
@@ -27,9 +28,9 @@ export const onLoginValidate = async ({ email, password }: Credentials,login:Log
             }
         }
     })
-        .then((res) => {
+        .then((userData) => {
             //write to cache
-            console.log('login response', res)
+            console.log('login response', userData)
             client.writeQuery({
                 query: gql`
                 query WriteToken($email: String!) {
@@ -43,12 +44,35 @@ export const onLoginValidate = async ({ email, password }: Credentials,login:Log
                     user: {
                         __typename: 'user',
                         id: 1,
-                        email: res.data.login.user.email,
-                        token: res.data.login.access_token
+                        email: userData.data.login.user.email,
+                        token: userData.data.login.access_token
                     },
                 },
                 variables: {
-                    email: res.data.login.user.email,
+                    email: userData.data.login.user.email,
+                }
+            })
+            return userData
+        })
+        .then((userData) => {
+            //write to cache
+            client.writeQuery({
+                query: gql`
+                query WriteListFiles($email: String!) {
+                files(email: $email) {
+                  id
+                  files
+                }
+            }`,
+                data: {
+                    files: {
+                        __typename: 'files',
+                        id:1,
+                        files: userData.data.login.user.files
+                    },
+                },
+                variables: {
+                    email: userData.data.login.user.email,
                 }
             })
         })
