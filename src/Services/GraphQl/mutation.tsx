@@ -52,3 +52,15 @@ mutation temporaryDocument(
    temporaryDocument(filename:$filename)
   }
 `
+export const UPLOAD_DOCUMENT = gql`
+mutation uploadDocument($picture: Upload!){
+  uploadDocument(picture:$picture){
+    name
+    path
+    user{
+      lastname
+      firstname
+    }
+  }
+}
+`
