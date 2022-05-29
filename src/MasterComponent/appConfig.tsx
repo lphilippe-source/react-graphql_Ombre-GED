@@ -7,20 +7,26 @@ import {
     gql,
 } from "@apollo/client"
 import { onError } from "@apollo/client/link/error"
-import { CachePersistor, LocalStorageWrapper } from "apollo3-cache-persist"
+import { createUploadLink } from "apollo-upload-client"
+import { CachePersistor, SessionStorageWrapper } from "apollo3-cache-persist"
 import { returnTokenFromLocal } from "../Services/utilsFunction/parsingTokenFunctions"
-export const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) => {
-            console.log(`graphQl error ${message}`)
-        })
-    }
-})
+// export const errorLink = onError(({ graphQLErrors, networkError }) => {
+//     if (graphQLErrors) {
+//         graphQLErrors.map(({ message, locations, path }) => {
+//             console.log(`graphQl error ${message} at ${locations} from ${path}`)
 
-export const link = from([
-    errorLink,
-    new HttpLink({ uri: 'http://localhost:3000/graphql' })
-])
+//         })
+//     }
+// })
+
+// export const link = from([
+//     errorLink,
+//     new HttpLink({ uri: 'http://localhost:3000/graphql' })
+// ])
+// export const link2 = new ApolloLink(()=>
+//     errorLink,
+//     createUploadLink({ uri: 'http://localhost:3000/' })
+// ])
 export const returnToken = () => {
 
     persistor.restore().then((res) => console.log('persistor: ', res))
@@ -59,13 +65,25 @@ export const authLink = new ApolloLink((operation, forward) => {
     // Call the next link in the middleware chain.
     return forward(operation)
 })
-export const cache = new InMemoryCache();
+export const cache = new InMemoryCache({
+    typePolicies: {
+        files: {
+            fields: {
+                files: {
+                    merge(existing = [], incoming: any[]) {
+                        return [...existing, ...incoming];
+                    },
+                },
+            }
+        },
+    },
+})
 
 //persist cache into localstorage
 export const persistor = new CachePersistor({
     cache,
     key: 'user-logged-in',
-    storage: new LocalStorageWrapper(window.localStorage),
+    storage: new SessionStorageWrapper(window.sessionStorage),
     persistenceMapper: async (token: any) => {
         // filter your cached data and queries
         // return filteredData;
@@ -73,11 +91,11 @@ export const persistor = new CachePersistor({
         console.log('dataformcache: ', d)
         if (d["user:1"]) {
             console.log("string:", JSON.stringify({ "user:1": d["user:1"] }))
-            return JSON.stringify({ "user:1": d["user:1"],"files:1":d["files:1"] })
+            return JSON.stringify({ "user:1": d["user:1"], "files:1": d["files:1"] })
         }
     },
 })
 export const client = new ApolloClient({
-    link: authLink.concat(link),
+    link: authLink.concat(createUploadLink({ uri: 'http://localhost:3000/graphql' })),
     cache
 })
