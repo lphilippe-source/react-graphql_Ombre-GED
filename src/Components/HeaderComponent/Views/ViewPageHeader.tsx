@@ -17,8 +17,6 @@ interface IViewPageHeaderProps {
 }
 
 export const ViewPageHeader: FC<IViewPageHeaderProps> = ({ navigate, routes, isLoginToken,toggleLogin,pseudo,mail}) => {
-// console.log('toggleLogin: ',toggleLogin)
-console.log(pseudo,mail)
     return (
         <PageHeader
             title={pseudo}
@@ -28,9 +26,6 @@ console.log(pseudo,mail)
             extra={[
                 <Button onClick={() => toggleLogin()} key="3">{isLoginToken ? 'Logout' : 'Login'}</Button>,
                 <Button onClick={() => navigate("/")} key="2">Home</Button>,
-                <Button key="1" type="primary">
-                    Primary
-                </Button>,
                 <ViewDropDownMenu ViewMenu={<ViewMenu />} key="more" />,
             ]}
             avatar={{ src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4' }}

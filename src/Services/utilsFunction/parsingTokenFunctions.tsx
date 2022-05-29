@@ -9,7 +9,7 @@ export function isJson(str: string | null): boolean {
 }
 export function returnTokenFromLocal() {
 
-    const data = window.localStorage.getItem('user-logged-in')
+    const data = window.sessionStorage.getItem('user-logged-in')
     console.log(data)
   
     if (isJson(data)) {

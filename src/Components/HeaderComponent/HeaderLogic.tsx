@@ -28,12 +28,10 @@ export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route, client }) 
 
     useEffect(() => {
 
-        const data = window.localStorage.getItem('user-logged-in')
-        // javascript <3
-        // console.log(data)//undefined
-        // console.log('data: ', typeof data === 'string')//true
-
+        const data = window.sessionStorage.getItem('user-logged-in')
+        
         if (isJson(data)) {
+            console.log("header data---->",data)
             if (data && JSON.parse(data)) {
                 setPseudo(JSON.parse(data)['user:1'].pseudo)
                 setMail(JSON.parse(data)['user:1'].email)
@@ -49,7 +47,7 @@ export const HeaderLogic: FC<IHeaderLogicProps> = ({ children, route, client }) 
     const toggleLogin = () => {
         isLoginToken && persistor.purge()
         client.clearStore()
-        navigate("/login")
+        navigate("/Login")
     }
     return (
         <>
