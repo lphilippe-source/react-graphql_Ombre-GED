@@ -31,10 +31,11 @@ interface IFiles {
     fileInfo: Data
     DownloadFile: (a: string, b: string) => Promise<any>
     uploadFile: IViewMainDropZoneProps
+    removeFile:(filename:string)=>any
+    loading: boolean
 }
 
-export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFile }) => {
-
+export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFile,removeFile, loading = false }) => {
     return (
 
         <Fragment>
@@ -46,18 +47,18 @@ export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFi
                 dataSource={fileInfo.files}
                 renderItem={item => (
                     <List.Item
-                        actions={[<a key={nanoid()} onClick={() => DownloadFile(item.name, item.ext)}>Download</a>, <a key={nanoid()}>Remove</a>]}
+                        actions={[<a key={nanoid()} onClick={() => DownloadFile(item.name, item.ext)}>Download</a>, <a onClick={()=>removeFile(item.name)} key={nanoid()}>Remove</a>]}
                     >
-                        {/* <Skeleton avatar title={false}
-             loading={item.loading}
-              active> */}
-                        <List.Item.Meta
-                            // avatar={<Avatar src={item.picture.large} />}
-                            title={<a onClick={() => DownloadFile(item.name, item.ext)}>{item.name}</a>}
-                        // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                        />
-                        {/* <div>content</div> */}
-                        {/* </Skeleton> */}
+                        <Skeleton avatar title={false}
+                            loading={loading}
+                            active>
+                            <List.Item.Meta
+                                // avatar={<Avatar src={item.picture.large} />}
+                                title={<a onClick={() => DownloadFile(item.name, item.ext)}>{item.name}</a>}
+                            // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                            />
+                            {/* <div>content</div> */}
+                        </Skeleton>
                     </List.Item>
                 )}
             />

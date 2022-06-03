@@ -8,7 +8,7 @@ export const MainComponent: FC = () => {
         {client =>
             <MainLogic client={client}>
                 {
-                    (fileInfo,DownloadFile,uploadFile) => <ViewMainComponent fileInfo={fileInfo} DownloadFile={DownloadFile} uploadFile={uploadFile}/>
+                    (fileInfo,DownloadFile,uploadFile,removeFile,isLoading) => <ViewMainComponent fileInfo={fileInfo} DownloadFile={DownloadFile} uploadFile={uploadFile} removeFile={removeFile} loading={isLoading} />
                 }
             </MainLogic>
         }

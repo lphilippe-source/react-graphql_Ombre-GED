@@ -64,3 +64,12 @@ mutation uploadDocument($picture: Upload!){
   }
 }
 `
+export const REMOVE_FILE = gql`
+mutation removedDocument(
+  $filename: String!
+  ){
+    removedDocument(
+  filename: $filename
+    )
+  }
+`

@@ -68,10 +68,11 @@ export const authLink = new ApolloLink((operation, forward) => {
 export const cache = new InMemoryCache({
     typePolicies: {
         files: {
+            // keyFields: ['id','files',["name"]],
             fields: {
                 files: {
                     merge(existing = [], incoming: any[]) {
-                        return [...existing, ...incoming];
+                        return [...incoming];
                     },
                 },
             }
