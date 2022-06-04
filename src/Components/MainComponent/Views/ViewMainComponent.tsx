@@ -18,6 +18,7 @@ import { nanoid } from 'nanoid'
 interface Files {
     name: string,
     ext: string,
+    size: number,
     __typename: string
 }
 interface Data {
@@ -31,11 +32,11 @@ interface IFiles {
     fileInfo: Data
     DownloadFile: (a: string, b: string) => Promise<any>
     uploadFile: IViewMainDropZoneProps
-    removeFile:(filename:string)=>any
+    removeFile: (filename: string) => any
     loading: boolean
 }
 
-export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFile,removeFile, loading = false }) => {
+export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFile, removeFile, loading = false }) => {
     return (
 
         <Fragment>
@@ -47,7 +48,7 @@ export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFi
                 dataSource={fileInfo.files}
                 renderItem={item => (
                     <List.Item
-                        actions={[<a key={nanoid()} onClick={() => DownloadFile(item.name, item.ext)}>Download</a>, <a onClick={()=>removeFile(item.name)} key={nanoid()}>Remove</a>]}
+                        actions={[<a key={nanoid()} onClick={() => DownloadFile(item.name, item.ext)}>Download</a>, <a onClick={() => removeFile(item.name)} key={nanoid()}>Remove</a>]}
                     >
                         <Skeleton avatar title={false}
                             loading={loading}
@@ -57,7 +58,7 @@ export const ViewMainComponent: FC<IFiles> = ({ fileInfo, DownloadFile, uploadFi
                                 title={<a onClick={() => DownloadFile(item.name, item.ext)}>{item.name}</a>}
                             // description="Ant Design, a design language for background applications, is refined by Ant UED Team"
                             />
-                            {/* <div>content</div> */}
+                            <div>{Math.ceil(item.size/1024)} ko</div>
                         </Skeleton>
                     </List.Item>
                 )}

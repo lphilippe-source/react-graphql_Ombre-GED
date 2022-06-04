@@ -35,12 +35,12 @@ export const MainLogic: FC<IMainProps> = ({ children, client }) => {
   const [uploadDocument, { data, loading: loading2, error: error2 }] = useMutation(UPLOAD_DOCUMENT)
   const [removedDocument, { loading: loading3, error: error3 }] = useMutation(REMOVE_FILE)
   const [isLoading, setIsLoading] = useState<null | Boolean>(null)
-  // const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
-  // TODO confirmDelete need to delete item from cache
+  
   useEffect(() => {
     if (isLoading == null) setIsLoading(false)
     else setIsLoading(s => !s)
   }, [loading, loading2, loading3])
+  
   useEffect(() => {
     const cachedFiles = client.readFragment({
 
@@ -68,12 +68,10 @@ export const MainLogic: FC<IMainProps> = ({ children, client }) => {
         }`
         }
         cache.updateFragment(fragment, (data) => {
-          console.log('data------->', data)
           return { files: data.files.filter((file: any) => file.name !== filename) }
         })
       })
       .then(() => persistor.persist())
-    // .then((res) => setConfirmDelete(res.data.removedDocument))
   }
   const downloadFile = async (name: string, mime: string) => {
     return await getData({
@@ -85,7 +83,6 @@ export const MainLogic: FC<IMainProps> = ({ children, client }) => {
   }
 
   const onDrop = useCallback(([picture]: File[]) => {
-    // Do something with the files
 
     uploadDocument({ variables: { picture } })
       .then(() => {
@@ -102,7 +99,8 @@ export const MainLogic: FC<IMainProps> = ({ children, client }) => {
             files: [...data.files, {
               __typename: "FileModel",
               name: picture.name,
-              ext: picture.type
+              ext: picture.type,
+              size:picture.size
             }]
           }
         }

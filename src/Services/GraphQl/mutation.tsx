@@ -8,10 +8,11 @@ mutation login($loginUserInput: LoginUserInput!) {
         id
         email
         pseudo
-        files{
-          name
-          ext
-        }
+          files{
+            name
+            ext
+            size
+          }
       }
     }
   }
