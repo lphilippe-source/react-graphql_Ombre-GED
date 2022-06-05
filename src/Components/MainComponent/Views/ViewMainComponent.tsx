@@ -8,7 +8,6 @@ import { List, Avatar, Button, Skeleton } from 'antd';
 import { useMutation } from "@apollo/client";
 import { TEMPORARY_FILE_DOWNLOAD } from "../../../Services/GraphQl/mutation";
 import { readFile } from "fs/promises";
-import download from 'downloadjs'
 import { readFileSync } from "fs";
 import { Buffer } from 'buffer'
 import { ListItemTypeProps } from "antd/lib/list/Item";
