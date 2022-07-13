@@ -68,7 +68,6 @@ export const authLink = new ApolloLink((operation, forward) => {
 export const cache = new InMemoryCache({
     typePolicies: {
         files: {
-            // keyFields: ['id','files',["name"]],
             fields: {
                 files: {
                     merge(existing = [], incoming: any[]) {
@@ -76,11 +75,11 @@ export const cache = new InMemoryCache({
                     },
                 },
             }
-        },
-    },
+        }
+    }
 })
 
-//persist cache into localstorage
+//persist cache into sessionstorage
 export const persistor = new CachePersistor({
     cache,
     key: 'user-logged-in',
@@ -92,7 +91,7 @@ export const persistor = new CachePersistor({
         console.log('dataformcache: ', d)
         if (d["user:1"]) {
             console.log("string:", JSON.stringify({ "user:1": d["user:1"] }))
-            return JSON.stringify({ "user:1": d["user:1"], "files:1": d["files:1"] })
+            return JSON.stringify({ "user:1": d["user:1"], "files:1": d["files:1"], "role:1": d["role:1"] })
         }
     },
 })
